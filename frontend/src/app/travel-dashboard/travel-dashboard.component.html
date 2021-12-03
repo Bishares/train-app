@@ -1,0 +1,51 @@
+<div class="dashboard-container">
+  <div class="caption">Reiseauskunft</div>
+  <div class="station-container">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Bahnhof</mat-label>
+      <input matInput placeholder="Berlin" [(ngModel)]="selectedTime" />
+    </mat-form-field>
+  </div>
+  <div class="date-time-container">
+    <div class="date-container">
+      <mat-form-field>
+        <mat-label>Datum auswählen</mat-label>
+        <input matInput [matDatepicker]="picker" [formControl]="selectedDate" />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="time-container">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Uhrzeit</mat-label>
+        <input
+          matInput
+          type="time"
+          placeholder="12:00"
+          [(ngModel)]="selectedTime"
+        />
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="arrival-departure-container">
+    <mat-radio-group
+      class="arrival-departure-radio-group"
+      [(ngModel)]="selectedDepartureOrArrival"
+    >
+      <mat-radio-button
+        class="arrival-departure-radio-button"
+        *ngFor="let elem of departureOrArrival"
+        [value]="departureOrArrival"
+      >
+        {{ elem }}
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
+  <div class="rail-container"></div>
+  <div class="search-button-container">
+    <button mat-raised-button (click)="onSave()">Suchen</button>
+  </div>
+  <div class="error-container" *ngIf="!everythingSelected && searchClicked">
+    <p>Bitte Abfahrts/Ankuntsort, Datum und Uhrzeit auswählen!</p>
+  </div>
+</div>

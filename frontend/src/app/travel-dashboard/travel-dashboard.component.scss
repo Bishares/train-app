@@ -1,0 +1,47 @@
+app-travel-dashboard {
+  .dashboard-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    .caption {
+      font-size: larger;
+      padding: 2rem;
+      display: flex;
+    }
+
+    .date-time-container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      .date-container {
+        padding: 1rem;
+      }
+
+      .time-container {
+        padding: 1rem;
+      }
+    }
+
+    .arrival-departure-container {
+      display: flex;
+
+      .arrival-departure-radio-group {
+        display: flex;
+        flex-direction: column;
+        margin: 15px 0;
+      }
+
+      .arrival-departure-radio-button {
+        margin: 5px;
+      }
+    }
+
+    background-color: beige;
+
+    margin: 4rem;
+    width: 30rem;
+    height: 30rem;
+  }
+}
