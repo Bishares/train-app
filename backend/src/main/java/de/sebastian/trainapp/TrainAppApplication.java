@@ -25,7 +25,7 @@ public class TrainAppApplication {
         return builder.build();
     }
 
-    @Bean
+    /*@Bean
     public CommandLineRunner run(RestTemplate restTemplate) throws Exception {
         return args -> {
             Location[] locations = restTemplate.getForObject(
@@ -35,5 +35,5 @@ public class TrainAppApplication {
                 System.out.println(locations[i].toString());
             }
         };
-    }
+    }*/
 }

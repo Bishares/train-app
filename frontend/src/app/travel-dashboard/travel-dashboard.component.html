@@ -30,14 +30,14 @@
   <div class="arrival-departure-container">
     <mat-radio-group
       class="arrival-departure-radio-group"
-      [(ngModel)]="selectedDepartureOrArrival"
+      [(ngModel)]="selectedPlace"
     >
       <mat-radio-button
         class="arrival-departure-radio-button"
-        *ngFor="let elem of departureOrArrival"
-        [value]="departureOrArrival"
+        *ngFor="let place of places"
+        [value]="place"
       >
-        {{ elem }}
+        {{ place }}
       </mat-radio-button>
     </mat-radio-group>
   </div>

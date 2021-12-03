@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { TrainStation } from './train-station.state';
+import { StationService } from '../station.service';
 
 @Component({
   selector: 'app-travel-dashboard',
@@ -15,13 +16,13 @@ export class TravelDashboardComponent implements OnInit {
 
   selectedDate = new FormControl(new Date().toISOString());
 
-  selectedDepartureOrArrival: string;
-  departureOrArrival: string[] = ['Abfahrt', 'Ankunft'];
+  selectedPlace: string;
+  places: string[] = ['Abfahrt', 'Ankunft'];
 
   everythingSelected: boolean = false;
   searchClicked: boolean = false;
 
-  constructor() {}
+  constructor(private stationService: StationService) {}
 
   ngOnInit(): void {}
 
