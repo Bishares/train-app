@@ -3,7 +3,22 @@
   <div class="station-container">
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Bahnhof</mat-label>
-      <input matInput placeholder="Berlin" [(ngModel)]="selectedTime" />
+      <input
+        type="text"
+        placeholder="Berlin"
+        matInput
+        [formControl]="myControl"
+        [matAutocomplete]="auto"
+        (keyup)="getStations($event)"
+      />
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option
+          *ngFor="let option of filteredOptions | async"
+          [value]="option"
+        >
+          {{ option.name }}
+        </mat-option>
+      </mat-autocomplete>
     </mat-form-field>
   </div>
   <div class="date-time-container">

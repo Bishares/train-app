@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { TrainStation } from './train-station.state';
 import { StationService } from '../station.service';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-travel-dashboard',
@@ -9,7 +11,11 @@ import { StationService } from '../station.service';
   styleUrls: ['./travel-dashboard.component.scss'],
 })
 export class TravelDashboardComponent implements OnInit {
-  trainStations: TrainStation[];
+  //trainStationVariables
+  myControl = new FormControl();
+  //stationOptions: string[] = [];
+  filteredOptions: Observable<TrainStation[]>;
+  trainStations: TrainStation[] = [];
   selectedTrainStation: TrainStation;
 
   selectedTime: string;
@@ -24,7 +30,36 @@ export class TravelDashboardComponent implements OnInit {
 
   constructor(private stationService: StationService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.filteredOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map((value) => this._filter(value))
+    );
+  }
+
+  getStations(event: any) {
+    let searchTerm = '';
+    searchTerm += event.target.value;
+    if (searchTerm.length >= 2) {
+      let success: any = {};
+      this.stationService
+        .getLocationsForName(searchTerm)
+        .toPromise()
+        .then((trainStations) => {
+          success = trainStations;
+          this.trainStations = success;
+          console.log(this.trainStations);
+        });
+    }
+  }
+
+  private _filter(value: string): TrainStation[] {
+    const filterValue = value.toLowerCase();
+
+    return this.trainStations.filter((option) =>
+      option.name.toLowerCase().includes(filterValue)
+    );
+  }
 
   onSave() {
     this.searchClicked = true;

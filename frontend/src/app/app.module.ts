@@ -13,6 +13,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [AppComponent, TravelDashboardComponent],
@@ -29,6 +30,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatRadioModule,
     MatButtonModule,
     HttpClientModule,
+    MatAutocompleteModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

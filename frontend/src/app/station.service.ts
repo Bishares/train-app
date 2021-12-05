@@ -13,11 +13,10 @@ export class StationService {
   constructor(private http: HttpClient) {}
 
   getLocationsForName(name: string): Observable<TrainStation[]> {
-    const params = new HttpParams();
-    params.set('name', name);
+    const params = new HttpParams().set('name', name);
     let result = this.http.get<TrainStation[]>(
       this.baseUrl + this.locationUrl,
-      { params: params }
+      { params }
     );
     return result;
   }
