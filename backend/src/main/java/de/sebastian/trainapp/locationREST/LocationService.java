@@ -1,4 +1,4 @@
-package de.sebastian.trainapp.LocationREST;
+package de.sebastian.trainapp.locationREST;
 
 import de.sebastian.trainapp.data.Location;
 import org.springframework.beans.factory.annotation.Autowired;
