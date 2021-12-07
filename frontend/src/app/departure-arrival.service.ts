@@ -20,7 +20,7 @@ export class DepartureArrivalService {
     time: string
   ): Observable<Arrival[]> {
     //TODO: put date and time properly into dateTime
-    const dateTime = date + time;
+    const dateTime = date + 'T' + time;
 
     const params = new HttpParams().set('id', id).set('dateTime', dateTime);
     let result = this.http.get<Arrival[]>(this.baseUrl + this.arrivalUrl, {
@@ -35,7 +35,7 @@ export class DepartureArrivalService {
     time: string
   ): Observable<Departure[]> {
     //TODO: put date and time properly into dateTime
-    const dateTime = date + time;
+    const dateTime = date + 'T' + time;
 
     const params = new HttpParams().set('id', id).set('dateTime', dateTime);
     let result = this.http.get<Departure[]>(this.baseUrl + this.departureUrl, {

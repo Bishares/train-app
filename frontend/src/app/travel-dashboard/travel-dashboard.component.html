@@ -11,7 +11,11 @@
         [matAutocomplete]="auto"
         (keyup)="getStations($event)"
       />
-      <mat-autocomplete #auto="matAutocomplete">
+      <mat-autocomplete
+        #auto="matAutocomplete"
+        (optionSelected)="getStation($event.option.value)"
+        [displayWith]="displayFn"
+      >
         <mat-option
           *ngFor="let option of filteredOptions | async"
           [value]="option"
@@ -62,5 +66,27 @@
   </div>
   <div class="error-container" *ngIf="!everythingSelected && searchClicked">
     <p>Bitte Abfahrts/Ankuntsort, Datum und Uhrzeit auswählen!</p>
+  </div>
+</div>
+<div class="result-container">
+  <div *ngIf="arrivals">
+    Ankünfte
+    <div class="arrivals" *ngFor="let arrival of arrivals">
+      <span>Name: {{ arrival.name }}</span>
+      <span>Typ: {{ arrival.type }}</span>
+      <span>Datetime: {{ arrival.dateTime }}</span>
+      <span>Herkunft: {{ arrival.origin }}</span>
+      <span>Gleis: {{ arrival.track }}</span>
+    </div>
+  </div>
+  <div *ngIf="departures">
+    Abfahrten
+    <div class="departures" *ngFor="let departure of departures">
+      <span>Name: {{ departure.name }}</span>
+      <span>Typ: {{ departure.type }}</span>
+      <span>Datetime: {{ departure.dateTime }}</span>
+      <span>Herkunft: {{ departure.origin }}</span>
+      <span>Gleis: {{ departure.track }}</span>
+    </div>
   </div>
 </div>

@@ -1,4 +1,7 @@
 app-travel-dashboard {
+  display: flex;
+  flex-direction: row;
+
   .dashboard-container {
     display: flex;
     align-items: center;
@@ -43,5 +46,28 @@ app-travel-dashboard {
     margin: 4rem;
     width: 30rem;
     height: 30rem;
+  }
+
+  .result-container {
+    width: 40rem;
+    height: 40rem;
+    background-color: aliceblue;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+
+    .arrivals {
+      padding: 1rem;
+      background-color: aqua;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .departures {
+      padding: 1rem;
+      background-color: cadetblue;
+      display: flex;
+      flex-direction: column;
+    }
   }
 }

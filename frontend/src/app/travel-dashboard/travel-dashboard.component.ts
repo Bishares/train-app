@@ -23,7 +23,8 @@ export class TravelDashboardComponent implements OnInit {
 
   selectedTime: string;
 
-  selectedDate = new FormControl(new Date().toISOString());
+  selectedDate = new FormControl(new Date());
+  selectedIsoDate: string;
 
   selectedPlace: string;
   places: string[] = ['Abfahrt', 'Ankunft'];
@@ -46,6 +47,10 @@ export class TravelDashboardComponent implements OnInit {
     );
   }
 
+  displayFn(trainstation: TrainStation) {
+    return trainstation && trainstation.name ? trainstation.name : '';
+  }
+
   getStations(event: any) {
     let searchTerm = '';
     searchTerm += event.target.value;
@@ -62,15 +67,32 @@ export class TravelDashboardComponent implements OnInit {
     }
   }
 
-  private _filter(value: string): TrainStation[] {
-    const filterValue = value.toLowerCase();
+  getStation(station) {
+    this.selectedTrainStation = station;
+  }
+
+  private _filter(value: TrainStation): TrainStation[] {
+    let filterValue;
+    if (value.name) {
+      filterValue = value.name.toLowerCase();
+    } else {
+      filterValue = '';
+    }
 
     return this.trainStations.filter((option) =>
       option.name.toLowerCase().includes(filterValue)
     );
   }
 
+  prepareDate(isoDate: string): string {
+    return isoDate.substr(0, isoDate.indexOf('T'));
+  }
+
   onSave() {
+    this.selectedIsoDate = this.prepareDate(
+      this.selectedDate.value.toISOString()
+    );
+
     this.searchClicked = true;
 
     if (this.isEverythingSelected()) {
@@ -82,7 +104,7 @@ export class TravelDashboardComponent implements OnInit {
         this.departureArrivalService
           .getDeparturesForIdDateAndTime(
             this.selectedTrainStation.id,
-            this.selectedDate.value,
+            this.selectedIsoDate,
             this.selectedTime
           )
           .toPromise()
@@ -94,7 +116,7 @@ export class TravelDashboardComponent implements OnInit {
         this.departureArrivalService
           .getArrivalsForIdDateAndTime(
             this.selectedTrainStation.id,
-            this.selectedDate.value,
+            this.selectedIsoDate,
             this.selectedTime
           )
           .toPromise()
@@ -110,14 +132,9 @@ export class TravelDashboardComponent implements OnInit {
   private isEverythingSelected(): boolean {
     return (
       this.selectedTrainStation != null &&
-      this.selectedDate != null &&
+      this.selectedIsoDate != null &&
       this.selectedTime != null &&
       this.selectedPlace != null
     );
   }
-  // evaluateSelections(): boolean{
-  //   // TODO:
-  //   if(this.selectedTrainStation && this.selectedTrainStation != "" &&)
-  //   return
-  // }
 }

@@ -1,7 +1,6 @@
 package de.sebastian.trainapp.departureArrivalREST;
 
 import de.sebastian.trainapp.data.ArrivalBoard;
-import de.sebastian.trainapp.data.Location;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
